@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from pylibpointing import PointingDevice, DisplayDevice, TransferFunction
+from libpointing import PointingDevice, DisplayDevice, TransferFunction
 
 import sys
 

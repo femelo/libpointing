@@ -24,7 +24,7 @@ elif system == 'Linux':
                          "libpointing.libpointing",
                          ["libpointing.pyx"],
                          language="c++",
-                         libraries=['pointing', "stdc++", "udev", "X11", "Xrandr"],
+                         libraries=['pointing', "stdc++", "udev", "X11", "Xrandr", "Xi"],
                          include_dirs=[
                             libpointing
                             ],
