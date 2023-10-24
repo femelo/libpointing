@@ -189,7 +189,7 @@ namespace pointing {
     inttime frac = 0 ;
     struct tm aTm ;
     memset(&aTm, 0, sizeof(aTm)) ;
-    /*int nbitems = */ sscanf(s.c_str(),"%4d-%2d-%2dT%2d:%2d:%2d.%9lldZ",
+    /*int nbitems = */ sscanf(s.c_str(),"%4d-%2d-%2dT%2d:%2d:%2d.%9ldZ",
 			      &aTm.tm_year,&aTm.tm_mon,&aTm.tm_mday,
 			      &aTm.tm_hour,&aTm.tm_min,&aTm.tm_sec,
 			      &frac) ;

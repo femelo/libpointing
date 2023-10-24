@@ -103,9 +103,9 @@ main(int argc, char** argv) {
     delete output ;
     delete func ;
 
-  } catch (std::runtime_error e) {
+  } catch (std::runtime_error const& e) {
     std::cerr << "Runtime error: " << e.what() << std::endl ;
-  } catch (std::exception e) {
+  } catch (std::exception const& e) {
     std::cerr << "Exception: " << e.what() << std::endl ;
   }
 

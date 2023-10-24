@@ -4,7 +4,7 @@
  *
  * Initial software
  * Authors: Izzat Mukhanov
- * Copyright © Inria
+ * Copyright ï¿½ Inria
  *
  * http://libpointing.org/
  *
@@ -44,7 +44,7 @@ xerror(const char *format, ...) {
 }
 
 static int
-error_handler(void) {
+error_handler(Display *) {
     exit(EXIT_FAILURE);
 }
 
