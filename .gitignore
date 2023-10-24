@@ -31,6 +31,7 @@ Makefile
 *pointing.node
 *target_wrapper.bat
 *.nupkg
+.vscode/*
 
 *node_modules*
 *build*
@@ -42,6 +43,7 @@ Makefile
 *Release/
 
 moc_*.cpp
+*moc_predefs.h
 ui_*.h
 qrc_*.cpp
 
@@ -64,3 +66,7 @@ tests/*/target_wrapper.sh
 bindings/Node/cache
 bindings/Node/nw
 bindings/Java/Jar/native/org_libpointing_*
+apps/qtExample/moc_predefs.h
+bindings/Python/cython/dist/*
+bindings/Python/cython/libpointing.egg-info/*
+bindings/Python/cython/libpointing.cpp

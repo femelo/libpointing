@@ -4,7 +4,7 @@
  *
  * Initial software
  * Authors: Nicolas Roussel
- * Copyright © Inria
+ * Copyright Inria
  *
  * http://libpointing.org/
  *

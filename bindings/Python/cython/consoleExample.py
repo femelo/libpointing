@@ -24,7 +24,11 @@ for desc in pm:
 	pdev = PointingDevice(desc.uri)
 """
 
-pdev = PointingDevice(b"any:")
+try:
+    pdev = PointingDevice(f"input:{sys.argv[1]}".encode('utf-8'))
+except:
+    pdev = PointingDevice(b"any:")
+
 ddev = DisplayDevice.create("any:")
 tfct = TransferFunction(b"system:", pdev, ddev)
 

@@ -7,8 +7,8 @@ setuptools.setup(
      name='libpointing',  
      version='1.0.8.3',
      provides=['libpointing'],
-     python_requires="==3.11.*",
-     package_data={'': ['libpointing.cpython-311-darwin.so', 'libpointing.cpython-311-x86_64-linux-gnu.so', 'libpointing.cp311-win_amd64.pyd']}, 
+     python_requires=">=3.8.*",
+     package_data={'': ['libpointing.cpython-38-darwin.so', 'libpointing.cpython-38-x86_64-linux-gnu.so', 'libpointing.cp38-win_amd64.pyd']}, 
      author="Géry Casiez",
      author_email="gery.casiez@univ-lille.fr",
      description="Python binding for libpointing.",
@@ -17,7 +17,7 @@ setuptools.setup(
      url="https://libpointing.org",
      packages=setuptools.find_packages(),
      install_requires=[ ],
-     licence="GPLv2",
+     license="GPLv2",
      platforms=['any'],
 
      classifiers=[

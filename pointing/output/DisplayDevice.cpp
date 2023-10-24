@@ -33,6 +33,7 @@
 #include <sstream>
 #include <cmath>
 #include <cstdlib>
+#include <iomanip>
 
 namespace pointing {
 
@@ -92,6 +93,10 @@ namespace pointing {
     double vPPI = bounds.size.height / hInInches ;
     if (hppiptr) *hppiptr = hPPI ;
     if (vppiptr) *vppiptr = vPPI ;
+    std::cout << "Display (px) : W = " << bounds.size.width << ", H = " << bounds.size.height << std::endl;
+    std::cout << "Display (mm) : W = " << size.width << ", H = " << size.height << std::endl;
+    std::cout << std::setprecision(1);
+    std::cout << "Display (dpi): W = " << hPPI << ", H = " << vPPI << std::endl;
 #if 0
     double PPI = (hPPI+vPPI)/2.0 ;
 #else

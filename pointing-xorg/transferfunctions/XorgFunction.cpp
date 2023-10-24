@@ -22,12 +22,12 @@
 
 namespace pointing {
 
-  // Default values from xorg-server-1.9.3/include/site.h
+// Default values from xorg-server-23.2.1/include/site.h
 #define XORG_DEFAULT_CTRL_NUM 2
 #define XORG_DEFAULT_CTRL_DEN 1
 #define XORG_DEFAULT_CTRL_THR 4
 
-  // Default values from xorg-server-1.9.3/dix/devices.c and ptrveloc.c
+// Default values from xorg-server-23.2.1/dix/devices.c and ptrveloc.c
 #define XORG_DEFAULT_SCHEME   PtrAccelPredictable
 #define XORG_DEFAULT_PROFILE  AccelProfileClassic
 #define XORG_DEFAULT_PRED_CM  10.0
@@ -48,15 +48,13 @@ namespace pointing {
     dev->ptrfeed->ctrl.num = ctrl_num ;
     dev->ptrfeed->ctrl.den = ctrl_den ;
     dev->ptrfeed->ctrl.threshold = ctrl_threshold ;
-    for (unsigned int i=0; i<MAX_VALUATORS; ++i)
-      dev->last.remainder[i] = 0 ;
     if (InitPointerAccelerationScheme(dev, scheme)) {
       DeviceVelocityPtr vel = GetDevicePredictableAccelData(dev) ;
       if (vel) {
-	SetAccelerationProfile(vel, predictableProfile) ;
-	vel->corr_mul = corr_mul ;
-	vel->const_acceleration = const_acceleration ;
-	vel->min_acceleration = min_acceleration ;
+        SetAccelerationProfile(vel, predictableProfile) ;
+        vel->corr_mul = corr_mul ;
+        vel->const_acceleration = const_acceleration ;
+        vel->min_acceleration = min_acceleration ;
       }
     } else
       std::cerr << "XorgFunction: InitPointerAccelerationScheme failed" << std::endl ;
@@ -148,12 +146,22 @@ namespace pointing {
       epoch = timestamp ;
     int first = 0, num = 2 ;
     int valuators[2] = {dxMickey, dyMickey} ;
-    int ms = (timestamp-epoch)/TimeStamp::one_millisecond ;
+    ValuatorMask *valuatorMask = valuator_mask_new(num);
+    valuator_mask_set_range(
+      valuatorMask,
+      first,
+      num,
+      (int *) valuators
+    ) ;
+    CARD32 ms = (CARD32) (timestamp-epoch)/TimeStamp::one_millisecond ;
     // std::cerr << "XorgFunction::apply: " << timestamp << "/" << ms << " " << dxMickey << " " << dyMickey << std::endl ;
     if (dev->valuator->accelScheme.AccelSchemeProc)
-      dev->valuator->accelScheme.AccelSchemeProc(dev, first, num, valuators, ms) ;
+      dev->valuator->accelScheme.AccelSchemeProc(dev, valuatorMask, ms) ;
+    // Update valuators
+    valuators[0] = valuator_mask_get(valuatorMask, 0);
+    valuators[1] = valuator_mask_get(valuatorMask, 1);
     if (normalize)
-      normalizeOutput(valuators, valuators + 1, output);
+      normalizeOutput((int *) valuators, (int *) (valuators + 1), output);
     *dxPixel = valuators[0] ;
     *dyPixel = valuators[1] ;
   }
@@ -163,8 +171,8 @@ namespace pointing {
               TimeStamp::inttime timestamp) {
     int dxInt, dyInt;
     applyi(dxMickey, dyMickey, &dxInt, &dyInt, timestamp);
-    *dxPixel = dxInt;
-    *dyPixel = dyInt;
+    *dxPixel = (double) dxInt;
+    *dyPixel = (double) dyInt;
   }
 
   URI

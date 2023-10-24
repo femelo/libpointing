@@ -53,8 +53,10 @@ cdef void deviceUpdateCallback(void *context,
 cdef class URI(object):
     cdef curi.URI *thiscptr_ 
     def __cinit__(self, uri=""):
-        # b = uri.encode("utf-8")
-        b = uri
+        if isinstance(uri, str):
+            b = uri.encode("utf-8")
+        else:
+            b = uri
         cdef char *s = b
         self.thiscptr_ = new curi.URI(s)
 
@@ -232,7 +234,10 @@ class Bounds(object):
 cdef class DisplayDevice(object):    
     cdef cdisplaydevice.DisplayDevice *thiscptr_
     def __cinit__(self, uri):
-        b = uri.encode("utf-8")
+        if isinstance(uri, str):
+            b = uri.encode("utf-8")
+        else:
+            b = uri
         self.thiscptr_ = cdisplaydevice.create(b)
 
     def __dealloc__(self):
